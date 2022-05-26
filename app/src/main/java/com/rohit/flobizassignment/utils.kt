@@ -1,0 +1,18 @@
+package com.rohit.flobizassignment
+
+import android.widget.ImageView
+import androidx.core.net.toUri
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+
+@BindingAdapter("imageUrlCircular")
+fun bindCircularImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        Glide.with(imgView.context)
+            .load(imgUri)
+            .apply(RequestOptions.circleCropTransform())
+            .into(imgView)
+    }
+}
